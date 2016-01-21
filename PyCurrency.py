@@ -4,29 +4,29 @@ import urllib.request
 
 class PyCurrency:
     @staticmethod
-    def get(A, B):
-        url = "http://free.currencyconverterapi.com/api/v3/convert?q={}_{}&compact=y".format(A,B)
+    def get(src, dst):
+        url = "http://free.currencyconverterapi.com/api/v3/convert?q={}_{}&compact=y".format(src,dst)
         with urllib.request.urlopen(url) as f:
-            rate = json.loads(f.read().decode())["{}_{}".format(A,B)]["val"]
+            rate = json.loads(f.read().decode())["{}_{}".format(src,dst)]["val"]
             return rate
         # r = requests.get(
         # "http://free.currencyconverterapi.com/api/"
-        # "v3/convert?q={}_{}&compact=y".format(A,B))
-        # rate = json.loads(r.content.decode())["{}_{}".format(A,B)]["val"]
+        # "v3/convert?q={}_{}&compact=y".format(src,dst))
+        # rate = json.loads(r.content.decode())["{}_{}".format(src,dst)]["val"]
         # return rate
 
     @staticmethod
-    def convert(A, B):
-        currency = A[-3:]
-        amount = float(A[:-3])
-        rate = PyCurrency.get(currency, B)
+    def convert(src, dst):
+        currency = src[-3:]
+        amount = float(src[:-3])
+        rate = PyCurrency.get(currency, dst)
         return amount*rate
 
-def get(A, B=None):
-    if B:
-        return PyCurrency.get(A, B)
+def get(src, dst=None):
+    if dst:
+        return PyCurrency.get(src, dst)
     else:
-        return PyCurrency.get(A[:3], A[3:])
+        return PyCurrency.get(src[:3], src[3:])
 
-def convert(A, B):
-    return PyCurrency.convert(A, B)
+def convert(src, dst):
+    return PyCurrency.convert(src, dst)
