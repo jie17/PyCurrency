@@ -23,7 +23,7 @@ pip install currency-calculator
 
 ### Convert currency
 
-```
+```python
 >>> import currency_calculator
 >>> currency_calculator.convert("1.0USD", "CNY")
 6.5772
